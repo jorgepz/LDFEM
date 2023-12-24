@@ -1,4 +1,4 @@
-# LDFEM
+# LDFEM (currently Unmaintained)
 
 LDFEM is a simple code for Large Deformations hyperelastic solids analysis using the Finite Element Method and Fortran90.
 

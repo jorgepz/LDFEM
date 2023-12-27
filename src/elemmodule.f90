@@ -147,7 +147,8 @@ module elemmodule
     ! --- modules ---
     use declarmodule
     use usefull
-    
+    use depsmodule
+
     implicit none
 
     ! --- declarations ---
@@ -175,7 +176,8 @@ module elemmodule
         A (1:4,3) = dble ( Yelem )
         A (1:4,4) = dble ( Zelem )
 
-        call M44INV ( A , Ainv , detA , okflag )
+        call M44INV ( A , Ainv , okflag )
+        detA = M44DET(A)
 
         ElemVols(i) = detA/6.0d+0 
         !
@@ -226,6 +228,7 @@ module elemmodule
     ! --- modules ---
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
 
@@ -288,7 +291,8 @@ module elemmodule
         !
         Fk = matmul ( Mk , BGe )
         
-        call M33INV (Fk , invFK , okflag , detFk )        
+        call M33INV (Fk , invFK , okflag )        
+        detFk = M33DET(Fk)
 
 !~          if (elem==1) then
 !~     write (*,*) "------"
@@ -450,6 +454,7 @@ module elemmodule
 
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
 
@@ -515,8 +520,9 @@ module elemmodule
         !
         Fk = matmul ( Mk , BGe )
         
-        call M33INV (Fk , invFK , okflag , detFk )        
-        
+        call M33INV (Fk , invFK , okflag )        
+        detFk = M33DET(Fk)
+
         if (detFk <0.0) then
           !
           write(*,*) "Error - detFk negativo: ",detFk , " en elemento: ", elem

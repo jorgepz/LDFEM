@@ -13,6 +13,7 @@ module materialmodule
     ! --- modules ---
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
 
@@ -55,7 +56,8 @@ module materialmodule
       shear  = MatsMat(FisPropElem,2)
       !
       C = 2.0D+0 * E + ojo
-      call M33INV ( C , CINV, OK_FLAG , DETC)
+      call M33INV ( C , CINV, OK_FLAG )
+      DETC = M33DET(C)
       S = lambda * ( sqrt(DETC) -1.0D+0 )* CINV +  2.0d+0 * shear * E
     end if
     
@@ -72,6 +74,7 @@ module materialmodule
     ! --- modules ---
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
 
@@ -99,7 +102,8 @@ module materialmodule
       c1 = MatsMat(FisPropElem,1)
       !
       C = 2.0D+0 * E + ojo
-      call M33INV ( C , CINV, OK_FLAG , DETC)
+      call M33INV ( C , CINV, OK_FLAG )
+      DETC = M33DET(C)
       DETF = sqrt(DETC)
       call trace( C, trC )
       
@@ -118,6 +122,7 @@ module materialmodule
     ! --- modules ---
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
 
@@ -160,7 +165,8 @@ module materialmodule
       shear  = MatsMat(FisPropElem,2)
       !
       Ccomp = 2.0D+0 * Ecomp + ojo
-      call M33INVComp ( Ccomp , CcompINV, OK_FLAG , DETC)
+      call M33INVComp ( Ccomp , CcompINV, OK_FLAG)
+      DETC = M33DETComp(Ccomp)
 !~       residmat = matmul(Ccomp, CcompINV)-ojo
 !~       write(*,*) "C", Ccomp
 !~       write(*,*) "resid mat:", residmat
@@ -182,6 +188,7 @@ module materialmodule
     ! --- modules ---
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
 
@@ -211,8 +218,8 @@ real*8 :: p
       c1 = MatsMat(FisPropElem,1)
       !
       Ccomp = 2.0D+0 * Ecomp + ojo
-      call M33INVComp ( Ccomp , CcompINV, OK_FLAG , DETC)
-
+      call M33INVComp ( Ccomp , CcompINV, OK_FLAG )
+      DETC = M33DETComp(Ccomp)
       DETF = sqrt(DETC)
       
       call traceComplex ( Ccomp , auxtracecomp )
@@ -235,6 +242,7 @@ real*8 :: p
     ! --- modules ---
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
 
@@ -280,6 +288,7 @@ real*8 :: p
     ! --- modules ---
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
         integer                                 :: FisPropElem

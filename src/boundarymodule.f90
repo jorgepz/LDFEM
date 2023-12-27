@@ -11,6 +11,7 @@ module boundarymodule
     ! --- modules ---
     use declarmodule
     use usefull
+    use depsmodule
 
     implicit none
 

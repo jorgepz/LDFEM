@@ -22,6 +22,7 @@ program ldfem
   use boundarymodule
   use materialmodule
   use usefull
+  use depsmodule
 
   ! ======================================================================
 
@@ -905,9 +906,11 @@ program ldfem
         jacobianmatspa = matmul ( elecoordspa , transpose( deriv) )
         
         ! material coord
-        call M33INV ( jacobianmat    , invjacobianmat    , okflag , jacobiandet    )
+        call M33INV ( jacobianmat    , invjacobianmat    , okflag )
+        jacobiandet = M33DET(jacobianmat)
         ! spatial coord
-        call M33INV ( jacobianmatspa , invjacobianmatspa , okflag , jacobiandetspa )
+        call M33INV ( jacobianmatspa , invjacobianmatspa , okflag )
+        jacobiandet = M33DET(jacobianmatspa)
         
         ! --------------------------------------
         if ( jacobiandet <= 0.0 ) then
@@ -945,7 +948,8 @@ program ldfem
 
           pe = pTot(elem)
           
-          call M33INV ( C , CINV, OKFLAG , DETC)
+          call M33INV ( C , CINV, OKFLAG)
+          DETC = M33DET( C )
           call tranvoigsym( CINV , voigCINV )
   
           ! --- cosserat tensor ---
@@ -1227,9 +1231,12 @@ program ldfem
           jacobianmatspa = matmul ( elecoordspa , transpose( deriv) )
           
           ! material coord
-          call M33INV ( jacobianmat    , invjacobianmat    , okflag , jacobiandet    )
+          call M33INV ( jacobianmat    , invjacobianmat    , okflag )
+          jacobiandet = M33DET(jacobianmat)
+
           ! spatial coord
-          call M33INV ( jacobianmatspa , invjacobianmatspa , okflag , jacobiandetspa )
+          call M33INV ( jacobianmatspa , invjacobianmatspa , okflag )
+          jacobiandetspa = M33DET( jacobianmatspa )
           
           ! --------------------------------------
           if ( jacobiandet <= 0.0 ) then
@@ -1252,7 +1259,8 @@ program ldfem
           C = 2.0D+0 * E + ojo
           call  BgrandeMats ( BgrandeMat , funder , F )
   
-          call M33INV ( C , CINV, OKFLAG , DETC)
+          call M33INV ( C , CINV, OKFLAG )
+          DETC = M33DET(C)
           call tranvoigsym( CINV , voigCINV )
   
         end do elements_p_do
@@ -1291,9 +1299,11 @@ program ldfem
           jacobianmatspa = matmul ( elecoordspa , transpose( deriv) )
           
           ! material coord
-          call M33INV ( jacobianmat    , invjacobianmat    , okflag , jacobiandet    )
+          call M33INV ( jacobianmat    , invjacobianmat    , okflag )
+          jacobiandet = M33DET(jacobianmat)
           ! spatial coord
-          call M33INV ( jacobianmatspa , invjacobianmatspa , okflag , jacobiandetspa )
+          call M33INV ( jacobianmatspa , invjacobianmatspa , okflag )
+          jacobiandet = M33DET(jacobianmatspa)
           
           ! --------------------------------------
           if ( jacobiandet <= 0.0 ) then
@@ -1316,7 +1326,9 @@ program ldfem
           C = 2.0D+0 * E + ojo
           call  BgrandeMats ( BgrandeMat , funder , F )
   
-          call M33INV ( C , CINV, OKFLAG , DETC)
+          call M33INV ( C , CINV, OKFLAG)
+          DETC = M33DET(C)
+
           call tranvoigsym( CINV , voigCINV )
   
   
@@ -1457,9 +1469,12 @@ program ldfem
         jacobianmatspa = matmul ( elecoordspa , transpose( deriv) )
         
         ! material coord
-        call M33INV ( jacobianmat    , invjacobianmat    , okflag , jacobiandet    )
+        call M33INV ( jacobianmat    , invjacobianmat    , okflag)
+        jacobiandet = M33DET(jacobianmat)
+
         ! spatial coord
-        call M33INV ( jacobianmatspa , invjacobianmatspa , okflag , jacobiandetspa )
+        call M33INV ( jacobianmatspa , invjacobianmatspa , okflag )
+        jacobiandetspa = M33DET(jacobianmatspa)
   
         funder = matmul ( transpose ( invjacobianmat ) , deriv )
         
@@ -1498,7 +1513,9 @@ program ldfem
         AllPioMat(9,elem) = P(3,1)
         
         ! --- cauchy tensor ---
-        call M33INV ( F , invF , okflag , detF )
+        call M33INV ( F , invF , okflag )
+        detF = M33DET(F)
+
         Sig = 1.0D+0 / detF *  matmul( F , P )
         AllSigMat(1,elem) = Sig(1,1)
         AllSigMat(2,elem) = Sig(2,2)

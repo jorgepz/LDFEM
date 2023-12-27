@@ -2,6 +2,9 @@
 
 LDFEM is a simple code for Large Deformations hyperelastic solids analysis using the Finite Element Method and Fortran90.
 
+
+![example deformation](https://github.com/jorgepz/LDFEM/blob/main/def.png)
+
 ## About
 
 The code recieves as input a [gmsh](https://gmsh.info/#Download) legacy file and a specific .inp file and, after solving using the Newton-Raphson method, generates results and [VTK](https://vtk.org/) files.

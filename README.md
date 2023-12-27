@@ -2,6 +2,7 @@
 
 LDFEM is a simple code for Large Deformations hyperelastic solids analysis using the Finite Element Method and Fortran90.
 
+### Example torsional deformation of an initially deformed square-section bar
 
 ![example deformation](https://github.com/jorgepz/LDFEM/blob/main/def.png)
 

@@ -165,7 +165,8 @@ module materialmodule
       shear  = MatsMat(FisPropElem,2)
       !
       Ccomp = 2.0D+0 * Ecomp + ojo
-      call M33INVComp ( Ccomp , CcompINV, OK_FLAG , DETC)
+      call M33INVComp ( Ccomp , CcompINV, OK_FLAG)
+      DETC = M33DETComp(Ccomp)
 !~       residmat = matmul(Ccomp, CcompINV)-ojo
 !~       write(*,*) "C", Ccomp
 !~       write(*,*) "resid mat:", residmat
@@ -217,8 +218,8 @@ real*8 :: p
       c1 = MatsMat(FisPropElem,1)
       !
       Ccomp = 2.0D+0 * Ecomp + ojo
-      call M33INVComp ( Ccomp , CcompINV, OK_FLAG , DETC)
-
+      call M33INVComp ( Ccomp , CcompINV, OK_FLAG )
+      DETC = M33DETComp(Ccomp)
       DETF = sqrt(DETC)
       
       call traceComplex ( Ccomp , auxtracecomp )

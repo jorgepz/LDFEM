@@ -10,7 +10,7 @@ LDFEM is a simple code for Large Deformations hyperelastic solids analysis using
 
 The code recieves as input a [gmsh](https://gmsh.info/#Download) legacy file and a specific .inp file and, after solving using the Newton-Raphson method, generates results and [VTK](https://vtk.org/) files.
 
-The code was developed between 2014 and 2015 by Jorge Pérez Zerpa ([@jorgepz](https://github.com/jorgepz)), with contributions (on stress tensors output and compressible case tangent matrix) made by Pablo Castrillo ([@pablocgp](https://github.com/pablocgp)) in December 2014, at the Instituto de Estructuras y Transporte de la [Facultad de Ingeniería](https://www.fing.edu.uy/) de la Universidad de la República, Uruguay.
+The code **was developed between 2014 and 2015** by Jorge Pérez Zerpa ([@jorgepz](https://github.com/jorgepz)), with contributions (on stress tensors output and compressible case tangent matrix) made by Pablo Castrillo ([@pablocgp](https://github.com/pablocgp)) in December 2014, at the Instituto de Estructuras y Transporte de la [Facultad de Ingeniería](https://www.fing.edu.uy/) de la Universidad de la República, Uruguay.
 
 ## Using LDFEM
 
